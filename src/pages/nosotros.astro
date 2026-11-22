@@ -1,0 +1,15 @@
+---
+import Base from '../layouts/Base.astro';
+import n from '../data/nosotros.json';
+const bloques = [['Quiénes somos', n.quienes], ['Nuestra misión', n.mision], ['Nuestra visión', n.vision], ['Nuestra historia', n.historia], ['Información general', n.info]];
+---
+<Base titulo="Quiénes somos" descripcion="Conoce a la Iglesia Proclamando el Reino de Cristo.">
+  <div class="wrap" style="padding-top:3rem;padding-bottom:3rem">
+    <h1>Quiénes somos</h1>
+    {bloques.map(([t, x]) => x && (
+      <section class="bloque"><h2>{t}</h2>
+        <div class="prosa">{x.split(/\n\s*\n/).map((p) => <p>{p}</p>)}</div>
+      </section>
+    ))}
+  </div>
+</Base>

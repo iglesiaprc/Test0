@@ -1,0 +1,13 @@
+{
+  "fijado": {},
+  "items": [
+    { "referencia": "Juan 3:16", "texto": "Porque de tal manera amó Dios al mundo, que ha dado a su Hijo unigénito, para que todo aquel que en él cree, no se pierda, mas tenga vida eterna.", "activo": true },
+    { "referencia": "Salmos 23:1", "texto": "Jehová es mi pastor; nada me faltará.", "activo": true },
+    { "referencia": "Filipenses 4:13", "texto": "Todo lo puedo en Cristo que me fortalece.", "activo": true },
+    { "referencia": "Josué 1:9", "texto": "Mira que te mando que te esfuerces y seas valiente; no temas ni desmayes, porque Jehová tu Dios estará contigo en dondequiera que vayas.", "activo": true },
+    { "referencia": "Proverbios 3:5", "texto": "Fíate de Jehová de todo tu corazón, y no te apoyes en tu propia prudencia.", "activo": true },
+    { "referencia": "Isaías 41:10", "texto": "No temas, porque yo estoy contigo; no desmayes, porque yo soy tu Dios que te esfuerzo; siempre te ayudaré, siempre te sustentaré con la diestra de mi justicia.", "activo": true },
+    { "referencia": "Mateo 11:28", "texto": "Venid a mí todos los que estáis trabajados y cargados, y yo os haré descansar.", "activo": true },
+    { "referencia": "Salmos 46:1", "texto": "Dios es nuestro amparo y fortaleza, nuestro pronto auxilio en las tribulaciones.", "activo": true }
+  ]
+}

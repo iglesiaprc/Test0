@@ -1,0 +1,12 @@
+---
+import Base from '../layouts/Base.astro';
+import FilaAnuncio from '../components/FilaAnuncio.astro';
+import { anunciosVisibles } from '../lib/site';
+const lista = anunciosVisibles();
+---
+<Base titulo="Anuncios" descripcion="Anuncios y novedades de la iglesia.">
+  <div class="wrap" style="padding-top:3rem;padding-bottom:3rem">
+    <h1>Anuncios y novedades</h1>
+    {lista.length ? lista.map((a) => <FilaAnuncio a={a} />) : <p class="vacio">No hay anuncios publicados ahora mismo.</p>}
+  </div>
+</Base>

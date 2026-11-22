@@ -1,0 +1,12 @@
+---
+import { url, fechaLarga } from '../lib/util';
+const { a } = Astro.props;
+---
+<article class:list={['fila', a.imagen && 'conimg', a.destacado && 'dest']}>
+  {a.imagen && <img class="img" src={url(a.imagen)} alt="" loading="lazy" />}
+  <div>
+    <h3>{a.titulo}</h3>
+    {a.publicado && <p class="meta">{fechaLarga(a.publicado)}</p>}
+    <p>{a.descripcion}</p>
+  </div>
+</article>

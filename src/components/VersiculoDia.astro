@@ -1,0 +1,29 @@
+---
+import data from '../data/versiculos.json';
+import { elegir } from '../lib/versiculo';
+import { hoyMadrid, fechaLarga } from '../lib/util';
+const hoy = hoyMadrid();
+const v = elegir(data.items, data.fijado, hoy);
+---
+<figure id="versiculo">
+  <blockquote data-texto>{v ? v.texto : 'Añade versículos desde el panel de administración.'}</blockquote>
+  <figcaption data-ref>{v?.referencia}</figcaption>
+  <p class="fecha" data-fecha>{fechaLarga(hoy)}</p>
+  <script type="application/json" id="versiculo-data" set:html={JSON.stringify(data)} />
+</figure>
+<script>
+  import { elegir } from '../lib/versiculo';
+  import { hoyMadrid, fechaLarga } from '../lib/util';
+  const el = document.getElementById('versiculo');
+  const raw = document.getElementById('versiculo-data')?.textContent;
+  if (el && raw) {
+    const d = JSON.parse(raw);
+    const hoy = hoyMadrid();
+    const v = elegir(d.items, d.fijado, hoy);
+    if (v) {
+      el.querySelector('[data-texto]')!.textContent = v.texto;
+      el.querySelector('[data-ref]')!.textContent = v.referencia;
+    }
+    el.querySelector('[data-fecha]')!.textContent = fechaLarga(hoy);
+  }
+</script>

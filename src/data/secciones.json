@@ -1,0 +1,7 @@
+{ "items": [
+  { "titulo": "Inicio", "ruta": "/", "id": "inicio", "activa": true },
+  { "titulo": "Quiénes somos", "ruta": "/nosotros/", "id": "nosotros", "activa": true },
+  { "titulo": "Directos", "ruta": "/directos/", "id": "directos", "activa": true },
+  { "titulo": "Anuncios", "ruta": "/anuncios/", "id": "anuncios", "activa": true },
+  { "titulo": "Contacto", "ruta": "/contacto/", "id": "contacto", "activa": true }
+] }

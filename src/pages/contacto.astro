@@ -1,0 +1,18 @@
+---
+import Base from '../layouts/Base.astro';
+import c from '../data/contacto.json';
+const filas = [['Dirección', c.direccion], ['Teléfono', c.telefono], ['Correo', c.email]].filter(([, v]) => v);
+const vacio = !filas.length && !c.horarios.length && !c.redes.length && !c.mapa_url;
+---
+<Base titulo="Contacto" descripcion="Cómo encontrarnos y contactar con la iglesia.">
+  <div class="wrap" style="padding-top:3rem;padding-bottom:3rem">
+    <h1>Contacto</h1>
+    {vacio && <p class="vacio">Aún no hay datos de contacto. Complétalos desde el panel, en Contacto.</p>}
+    {filas.length > 0 && <dl class="datos">{filas.map(([k, v]) => (<><dt>{k}</dt><dd>{k === 'Correo' ? <a href={`mailto:${v}`}>{v}</a> : k === 'Teléfono' ? <a href={`tel:${v}`}>{v}</a> : v}</dd></>))}</dl>}
+    {c.mapa_url && <p><a class="btn" href={c.mapa_url} target="_blank" rel="noopener noreferrer">Ver en Google Maps</a></p>}
+    {c.horarios.length > 0 && <section class="bloque"><h2>Horarios de reuniones</h2>
+      <dl class="datos">{c.horarios.map((h: any) => (<><dt>{h.dia}</dt><dd>{h.hora} · {h.actividad}</dd></>))}</dl></section>}
+    {c.redes.length > 0 && <section class="bloque"><h2>Redes sociales</h2>
+      <ul>{c.redes.map((r: any) => <li><a href={r.url} target="_blank" rel="noopener noreferrer">{r.nombre}</a></li>)}</ul></section>}
+  </div>
+</Base>

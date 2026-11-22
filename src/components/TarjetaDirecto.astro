@@ -1,0 +1,16 @@
+---
+import { url, ytId, fechaLarga } from '../lib/util';
+const { d } = Astro.props;
+const id = ytId(d.youtube);
+const img = d.miniatura ? url(d.miniatura) : id ? `https://i.ytimg.com/vi/${id}/hqdefault.jpg` : '';
+const etiqueta = { en_directo: 'En directo', programado: 'Próximo', finalizado: 'Emitido' }[d.estado as string];
+---
+<article class="tarjeta">
+  {img ? <img class="img" src={img} alt="" loading="lazy" /> : <div class="img"></div>}
+  <div class="cuerpo">
+    <span class:list={['estado', d.estado === 'en_directo' && 'vivo']}>{etiqueta}</span>
+    <a class="titulo" href={d.youtube} target="_blank" rel="noopener noreferrer"><h3>{d.titulo}</h3></a>
+    <p class="meta">{fechaLarga(d.fecha)}{d.categoria ? ` · ${d.categoria}` : ''}</p>
+    {d.descripcion && <p>{d.descripcion}</p>}
+  </div>
+</article>

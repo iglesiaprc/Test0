@@ -1,0 +1,62 @@
+:root{
+  --azul:#0f1e3d; --azul-2:#22386b; --oro:#e0b25a; --oro-texto:#7a5200;
+  --papel:#f5f6f8; --blanco:#fff; --linea:#d8dde6; --texto:#1a2236; --suave:#4b5670;
+  --serif:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;
+  --sans:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  --ancho:68rem;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font:1.0625rem/1.65 var(--sans);color:var(--texto);background:var(--papel)}
+img{max-width:100%;display:block}
+a{color:var(--azul-2);text-underline-offset:.2em}
+a:focus-visible{outline:3px solid var(--oro);outline-offset:3px;border-radius:2px}
+h1,h2,h3{font-family:var(--serif);line-height:1.2;font-weight:600;color:var(--azul)}
+h2{font-size:clamp(1.5rem,2.5vw + 1rem,2.1rem);margin:0 0 1rem}
+h3{font-size:1.2rem;margin:.25rem 0}
+.wrap{max-width:var(--ancho);margin:0 auto;padding:0 1.25rem}
+section.bloque{padding:3.5rem 0;border-top:1px solid var(--linea)}
+.prosa{max-width:38rem;font-family:var(--serif);font-size:1.15rem;line-height:1.75}
+.suave{color:var(--suave)}
+
+header.cab{background:var(--blanco);border-bottom:1px solid var(--linea)}
+.cab .wrap{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:.5rem 1.5rem;padding-top:.75rem;padding-bottom:.75rem}
+.marca{display:flex;align-items:center;gap:.7rem;text-decoration:none;color:var(--azul);font-family:var(--serif);font-weight:700;font-size:1.2rem}
+.marca img{height:2.5rem;width:auto}
+.monograma{display:grid;place-items:center;width:2.5rem;height:2.5rem;border-radius:50%;background:var(--azul);color:var(--oro);font-size:.85rem}
+nav ul{list-style:none;display:flex;flex-wrap:wrap;gap:.25rem 1.1rem;margin:0;padding:0}
+nav a{display:block;padding:.4rem 0;text-decoration:none;color:var(--texto);border-bottom:2px solid transparent;transition:border-color .2s}
+nav a:hover,nav a[aria-current=page]{border-color:var(--oro-texto)}
+
+.hero{background:var(--azul);color:#e9edf6;padding:3.5rem 0 4rem}
+.hero .nombre{font-size:1.1rem;color:var(--oro);margin:0 0 2.5rem;font-weight:500}
+.hero figure{margin:0;max-width:44rem;animation:entra .9s ease both}
+.hero blockquote{margin:0;font-family:var(--serif);font-size:clamp(1.55rem,3.6vw + .9rem,2.9rem);line-height:1.25;color:#fff}
+.hero figcaption{margin-top:1.25rem;color:var(--oro);font-family:var(--serif);font-size:1.25rem}
+.hero .fecha{margin:1.5rem 0 0;font-size:.95rem;color:#aab4cc}
+.hero .bienvenida{margin:2.5rem 0 0;max-width:34rem;color:#c9d1e3}
+@keyframes entra{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}html{scroll-behavior:auto}}
+
+.rejilla{display:grid;gap:1.5rem;grid-template-columns:repeat(auto-fill,minmax(16rem,1fr))}
+.tarjeta{background:var(--blanco);border:1px solid var(--linea);border-radius:4px;overflow:hidden}
+.tarjeta .img{aspect-ratio:16/9;background:var(--azul);object-fit:cover;width:100%}
+.tarjeta .cuerpo{padding:1rem 1.1rem 1.25rem}
+.tarjeta a.titulo{text-decoration:none;color:inherit}
+.tarjeta a.titulo:hover h3{text-decoration:underline}
+.estado{display:inline-block;font-size:.85rem;padding:.1rem .6rem;border-radius:99px;background:#e7ebf3;color:var(--azul)}
+.estado.vivo{background:var(--oro);color:#2b1c00;font-weight:600}
+.meta{margin:.2rem 0 .5rem;font-size:.92rem;color:var(--suave)}
+
+.fila{display:grid;gap:1rem;padding:1.5rem 0;border-top:1px solid var(--linea)}
+.fila:first-child{border-top:0}
+@media(min-width:40rem){.fila.conimg{grid-template-columns:14rem 1fr}}
+.fila.dest{border-left:4px solid var(--oro);padding-left:1.1rem}
+.vacio{padding:2rem;border:1px dashed var(--linea);border-radius:4px;color:var(--suave);background:var(--blanco)}
+
+dl.datos{display:grid;grid-template-columns:max-content 1fr;gap:.4rem 1.5rem}
+dl.datos dt{font-weight:600;color:var(--azul)}dl.datos dd{margin:0}
+footer.pie{background:var(--azul);color:#b9c3da;padding:2.5rem 0;font-size:.92rem}
+footer.pie p{margin:.3rem 0}
+.btn{display:inline-block;padding:.6rem 1.1rem;background:var(--azul);color:#fff;border-radius:4px;text-decoration:none}
+.btn:hover{background:var(--azul-2)}

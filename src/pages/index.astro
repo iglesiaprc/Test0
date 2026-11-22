@@ -1,0 +1,35 @@
+---
+import Base from '../layouts/Base.astro';
+import VersiculoDia from '../components/VersiculoDia.astro';
+import TarjetaDirecto from '../components/TarjetaDirecto.astro';
+import FilaAnuncio from '../components/FilaAnuncio.astro';
+import sitio from '../data/sitio.json';
+import { activa, anunciosVisibles, directosPorEstado } from '../lib/site';
+import { url } from '../lib/util';
+const { enDirecto, proximos } = directosPorEstado();
+const destacado = [...enDirecto, ...proximos].slice(0, 2);
+const anuncios = anunciosVisibles().slice(0, 3);
+---
+<Base>
+  <section class="hero">
+    <div class="wrap">
+      <h1 class="nombre">{sitio.nombre}</h1>
+      <VersiculoDia />
+      <p class="bienvenida">{sitio.hero_texto}</p>
+    </div>
+  </section>
+  {activa('directos') && destacado.length > 0 && (
+    <section class="bloque"><div class="wrap">
+      <h2>{enDirecto.length ? 'Estamos en directo' : 'Próximo directo'}</h2>
+      <div class="rejilla">{destacado.map((d) => <TarjetaDirecto d={d} />)}</div>
+      <p><a href={url('/directos/')}>Ver todos los directos</a></p>
+    </div></section>
+  )}
+  {activa('anuncios') && anuncios.length > 0 && (
+    <section class="bloque"><div class="wrap">
+      <h2>Novedades</h2>
+      {anuncios.map((a) => <FilaAnuncio a={a} />)}
+      <p><a href={url('/anuncios/')}>Ver todos los anuncios</a></p>
+    </div></section>
+  )}
+</Base>

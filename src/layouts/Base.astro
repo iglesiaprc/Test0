@@ -1,0 +1,44 @@
+---
+import '../styles/global.css';
+import sitio from '../data/sitio.json';
+import secciones from '../data/secciones.json';
+import { url } from '../lib/util';
+const { titulo, descripcion = sitio.descripcion } = Astro.props;
+const actual = Astro.url.pathname.replace(/\/$/, '');
+const esActual = (r: string) => actual === url(r).replace(/\/$/, '');
+---
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>{titulo ? `${titulo} · ${sitio.nombre_corto}` : sitio.nombre}</title>
+  <meta name="description" content={descripcion} />
+  <meta property="og:title" content={titulo || sitio.nombre} />
+  <meta property="og:description" content={descripcion} />
+</head>
+<body>
+  <header class="cab">
+    <div class="wrap">
+      <a class="marca" href={url('/')}>
+        {sitio.logo ? <img src={url(sitio.logo)} alt="" /> : <span class="monograma" aria-hidden="true">PRC</span>}
+        {sitio.nombre_corto}
+      </a>
+      <nav aria-label="Principal">
+        <ul>
+          {secciones.items.filter((s) => s.activa).map((s) => (
+            <li><a href={url(s.ruta)} aria-current={esActual(s.ruta) ? 'page' : undefined}>{s.titulo}</a></li>
+          ))}
+        </ul>
+      </nav>
+    </div>
+  </header>
+  <main><slot /></main>
+  <footer class="pie">
+    <div class="wrap">
+      <p>{sitio.pie}</p>
+      <p>{sitio.nota_biblia}</p>
+    </div>
+  </footer>
+</body>
+</html>

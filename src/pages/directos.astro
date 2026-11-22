@@ -1,0 +1,19 @@
+---
+import Base from '../layouts/Base.astro';
+import TarjetaDirecto from '../components/TarjetaDirecto.astro';
+import { directosPorEstado } from '../lib/site';
+const { enDirecto, proximos, anteriores } = directosPorEstado();
+const grupos = [['En directo ahora', enDirecto], ['Próximos directos', proximos], ['Directos anteriores', anteriores]] as const;
+const hay = enDirecto.length + proximos.length + anteriores.length > 0;
+---
+<Base titulo="Directos" descripcion="Retransmisiones de la iglesia y grabaciones anteriores.">
+  <div class="wrap" style="padding-top:3rem;padding-bottom:3rem">
+    <h1>Directos</h1>
+    {!hay && <p class="vacio">Todavía no hay directos publicados. Añádelos desde el panel, en Directos.</p>}
+    {grupos.map(([nombre, lista]) => lista.length > 0 && (
+      <section class="bloque"><h2>{nombre}</h2>
+        <div class="rejilla">{lista.map((d) => <TarjetaDirecto d={d} />)}</div>
+      </section>
+    ))}
+  </div>
+</Base>

@@ -1,0 +1,149 @@
+# >>> EDITA SOLO LAS 3 LÍNEAS MARCADAS CON "CAMBIAR" (ver README, paso 5) <<<
+backend:
+  name: github
+  repo: TU_USUARIO/TU_REPOSITORIO          # CAMBIAR
+  branch: main
+  base_url: https://TU-WORKER.workers.dev   # CAMBIAR (URL del Worker de login)
+  auth_endpoint: auth
+  commit_messages:
+    create: "Panel: añadir {{collection}} «{{slug}}»"
+    update: "Panel: actualizar {{collection}} «{{slug}}»"
+    delete: "Panel: eliminar {{collection}} «{{slug}}»"
+locale: es
+site_url: https://TU_USUARIO.github.io/TU_REPOSITORIO/   # CAMBIAR
+media_folder: public/uploads
+public_folder: /uploads
+
+collections:
+  - name: sitio
+    label: Inicio y sitio
+    files:
+      - label: Textos principales
+        name: sitio
+        file: src/data/sitio.json
+        fields:
+          - { label: Nombre completo, name: nombre, widget: string }
+          - { label: Nombre corto, name: nombre_corto, widget: string }
+          - { label: Descripción (para buscadores), name: descripcion, widget: text }
+          - { label: Logotipo (opcional), name: logo, widget: image, required: false }
+          - { label: Texto de bienvenida en inicio, name: hero_texto, widget: text }
+          - { label: Texto del pie de página, name: pie, widget: string }
+          - { label: Aviso de la versión bíblica, name: nota_biblia, widget: text }
+      - label: Menú y secciones
+        name: secciones
+        file: src/data/secciones.json
+        fields:
+          - label: Secciones del menú
+            name: items
+            widget: list
+            summary: "{{fields.titulo}}"
+            fields:
+              - { label: Nombre en el menú, name: titulo, widget: string }
+              - { label: Dirección (no cambiar en secciones existentes), name: ruta, widget: string }
+              - { label: Identificador (no cambiar), name: id, widget: string }
+              - { label: Mostrar en el menú, name: activa, widget: boolean, default: true }
+
+  - name: versiculos
+    label: Versículos
+    files:
+      - label: Versículos del día
+        name: versiculos
+        file: src/data/versiculos.json
+        fields:
+          - label: Fijar un versículo para un día concreto (opcional; vacío = automático)
+            name: fijado
+            widget: object
+            required: false
+            fields:
+              - { label: Referencia (igual que en la lista, ej. Juan 3:16), name: referencia, widget: string, required: false }
+              - { label: Día, name: fecha, widget: datetime, date_format: "YYYY-MM-DD", time_format: false, format: "YYYY-MM-DD", picker_utc: false, required: false }
+          - label: Lista de versículos
+            name: items
+            widget: list
+            summary: "{{fields.referencia}}"
+            fields:
+              - { label: Referencia (libro capítulo:versículo), name: referencia, widget: string }
+              - { label: Texto (RVR1960), name: texto, widget: text }
+              - { label: Activo en la rotación, name: activo, widget: boolean, default: true }
+
+  - name: directos
+    label: Directos
+    files:
+      - label: Directos y retransmisiones
+        name: directos
+        file: src/data/directos.json
+        fields:
+          - label: Directos
+            name: items
+            widget: list
+            summary: "{{fields.titulo}} ({{fields.estado}})"
+            fields:
+              - { label: Título, name: titulo, widget: string }
+              - { label: Descripción, name: descripcion, widget: text, required: false }
+              - { label: Enlace de YouTube, name: youtube, widget: string, pattern: ["^https?://", "Debe empezar por https://"] }
+              - { label: Miniatura propia (si vacío, usa la de YouTube), name: miniatura, widget: image, required: false }
+              - { label: Fecha y hora (hora de Madrid), name: fecha, widget: datetime, format: "YYYY-MM-DDTHH:mm", date_format: "DD/MM/YYYY", time_format: "HH:mm", picker_utc: false }
+              - { label: Estado, name: estado, widget: select, options: [{label: Programado, value: programado}, {label: En directo ahora, value: en_directo}, {label: Finalizado, value: finalizado}], default: programado }
+              - { label: Categoría (opcional), name: categoria, widget: string, required: false }
+
+  - name: anuncios
+    label: Anuncios
+    files:
+      - label: Anuncios y novedades
+        name: anuncios
+        file: src/data/anuncios.json
+        fields:
+          - label: Anuncios
+            name: items
+            widget: list
+            summary: "{{fields.titulo}} ({{fields.estado}})"
+            fields:
+              - { label: Título, name: titulo, widget: string }
+              - { label: Descripción, name: descripcion, widget: text }
+              - { label: Imagen (opcional), name: imagen, widget: image, required: false }
+              - { label: Fecha de publicación, name: publicado, widget: datetime, date_format: "YYYY-MM-DD", time_format: false, format: "YYYY-MM-DD", picker_utc: false }
+              - { label: Fecha de fin (opcional), name: hasta, widget: datetime, date_format: "YYYY-MM-DD", time_format: false, format: "YYYY-MM-DD", picker_utc: false, required: false }
+              - { label: Estado, name: estado, widget: select, options: [{label: Publicado, value: publicado}, {label: Borrador, value: borrador}], default: borrador }
+              - { label: Destacar, name: destacado, widget: boolean, default: false }
+
+  - name: nosotros
+    label: Quiénes somos
+    files:
+      - label: Información de la iglesia
+        name: nosotros
+        file: src/data/nosotros.json
+        fields:
+          - { label: Quiénes somos, name: quienes, widget: text }
+          - { label: Misión, name: mision, widget: text }
+          - { label: Visión, name: vision, widget: text }
+          - { label: Historia, name: historia, widget: text }
+          - { label: Información general, name: info, widget: text }
+
+  - name: contacto
+    label: Contacto
+    files:
+      - label: Datos de contacto
+        name: contacto
+        file: src/data/contacto.json
+        fields:
+          - { label: Dirección, name: direccion, widget: string, required: false }
+          - { label: Teléfono, name: telefono, widget: string, required: false }
+          - { label: Correo electrónico, name: email, widget: string, required: false }
+          - { label: Enlace de Google Maps, name: mapa_url, widget: string, required: false }
+          - label: Redes sociales
+            name: redes
+            widget: list
+            required: false
+            summary: "{{fields.nombre}}"
+            fields:
+              - { label: Red (ej. Instagram), name: nombre, widget: string }
+              - { label: Enlace, name: url, widget: string }
+          - label: Horarios de reuniones
+            name: horarios
+            widget: list
+            required: false
+            summary: "{{fields.dia}} {{fields.hora}}"
+            fields:
+              - { label: Día, name: dia, widget: string }
+              - { label: Hora, name: hora, widget: string }
+              - { label: Actividad, name: actividad, widget: string }
